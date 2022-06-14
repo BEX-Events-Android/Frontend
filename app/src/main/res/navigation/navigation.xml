@@ -25,5 +25,13 @@
             app:destination="@id/registerFragment"
             app:popUpTo="@id/loginFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_loginFragment_to_eventsList"
+            app:destination="@id/eventsList" />
     </fragment>
+    <fragment
+        android:id="@+id/eventsList"
+        android:name="com.example.db_events.EventsList"
+        android:label="fragment_events_list"
+        tools:layout="@layout/fragment_events_list" />
 </navigation>
