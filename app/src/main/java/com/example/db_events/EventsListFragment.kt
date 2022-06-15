@@ -10,7 +10,7 @@ import androidx.navigation.findNavController
 import com.example.db_events.databinding.FragmentEventsListBinding
 import com.example.db_events.databinding.FragmentLoginBinding
 
-class EventsList : Fragment() {
+class EventsListFragment : Fragment() {
     private lateinit var binding: FragmentEventsListBinding
 
     override fun onCreateView(
