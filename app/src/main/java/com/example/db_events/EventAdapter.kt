@@ -7,7 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class EventModel(var name: String, var date: String, var description: String) {
+data class EventModel(val name: String, val date: String, val description: String) {
     
 }
 
