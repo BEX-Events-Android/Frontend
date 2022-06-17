@@ -5,9 +5,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.db_events.databinding.EventListViewBinding
 
-class EventAdapter : RecyclerView.Adapter<EventAdapter.EventViewListHolder>() {
-    var data = listOf<EventModel>(
-        EventModel("event1", "03/05/20", "description1"),
+class EventAdapter: RecyclerView.Adapter<EventAdapter.EventViewListHolder>() {
+    var data = listOf<EventModel>(EventModel("event1", "03/05/20", "description1"),
         EventModel("event2", "04/05/21", "description2"),
         EventModel("event3", "05/05/21", "description3"),
         EventModel("event2", "04/05/21", "description2"),
