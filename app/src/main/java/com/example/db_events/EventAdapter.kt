@@ -48,7 +48,7 @@ class EventAdapter: RecyclerView.Adapter<EventAdapter.EventViewListHolder>() {
     class EventViewListHolder(private val binding: EventListViewBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: EventModel) {
-            binding.eventDate.text = item.date
+            binding.eventDate.text = item.startDateTime
             binding.eventDescription.text = item.description
             binding.eventNameTv.text = item.name
         }
