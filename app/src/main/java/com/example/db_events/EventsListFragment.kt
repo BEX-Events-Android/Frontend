@@ -40,8 +40,8 @@ class EventsListFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentEventsListBinding.inflate(inflater, container, false)
 
-        val adapter = EventAdapter()
-        binding.eventsList.adapter = adapter
+//        val adapter = EventAdapter()
+//        binding.eventsList.adapter = adapter
 
         getEventsList()
 
@@ -52,15 +52,15 @@ class EventsListFragment : Fragment() {
     fun getEventsList() {
 
         coroutineScope.launch {
-            var getEventsDeferred = EventsApi.retrofitService.getEvents()
-            try {
-                var listResult = getEventsDeferred.await()
-                _response.value = "success"
-            } catch (t:Throwable) {
-                _response.value = "Failure: " + t.message
-                println("RIPRIPRIPRIRPIPRIPR")
+            val eventsResponse = EventsApi.retrofitService.getEvents()
+            if (eventsResponse.isNotEmpty()) {
+                println(eventsResponse)
+                binding.eventsList.adapter = EventAdapter(eventsResponse)
+//                println(eventsResponse.body())
+            } else {
+                // TODO error handling
             }
         }
     }
-    
+
 }

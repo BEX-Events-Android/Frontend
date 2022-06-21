@@ -33,7 +33,11 @@
         android:id="@+id/eventsListFragment"
         android:name="com.example.db_events.EventsListFragment"
         android:label="fragment_events_list"
-        tools:layout="@layout/fragment_events_list" />
+        tools:layout="@layout/fragment_events_list" >
+        <action
+            android:id="@+id/action_eventsListFragment_to_detailedEventFragment"
+            app:destination="@id/detailedEventFragment" />
+    </fragment>
     <fragment
         android:id="@+id/detailedEventFragment"
         android:name="com.example.db_events.DetailedEventFragment"
