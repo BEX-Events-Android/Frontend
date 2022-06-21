@@ -6,4 +6,5 @@
         <item name="android:textSize">@dimen/medium_text</item>
         <item name="android:textStyle">bold</item>
     </style>
+  
 </resources>
