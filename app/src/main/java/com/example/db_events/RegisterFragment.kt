@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.navigation.findNavController
 import com.example.db_events.databinding.FragmentLoginBinding
 import com.example.db_events.databinding.FragmentRegisterBinding
@@ -19,8 +20,10 @@ class RegisterFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentRegisterBinding.inflate(inflater, container, false)
 
+        val bundle = bundleOf("id" to "5")
+
         binding.loginButton.setOnClickListener{ view: View ->
-            view.findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
+            view.findNavController().navigate(R.id.action_registerFragment_to_loginFragment, bundle)
         }
 
         return binding.root
