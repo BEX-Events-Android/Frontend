@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/event_list_item"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+
+    >
 
     <ImageView
         android:id="@+id/event_image"
@@ -21,7 +23,7 @@
         app:srcCompat="@android:drawable/btn_star_big_on" />
 
     <TextView
-        android:id="@+id/event_name_tv"
+        android:id="@+id/event_title"
         style="@style/Title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -44,7 +46,7 @@
         app:layout_constraintBottom_toTopOf="@+id/event_date"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/event_image"
-        app:layout_constraintTop_toBottomOf="@+id/event_name_tv"
+        app:layout_constraintTop_toBottomOf="@+id/event_title"
         tools:text="event desc" />
 
     <TextView

@@ -9,5 +9,8 @@
     <dimen name="big_margin">24dp</dimen>
     <dimen name="x_big_margin">32dp</dimen>
     <dimen name="horizontal_margin">8dp</dimen>
+    <dimen name="s_padding">8dp</dimen>
+    <dimen name="m_padding">16dp</dimen>
+    <dimen name="b_padding">24dp</dimen>
 
 </resources>
