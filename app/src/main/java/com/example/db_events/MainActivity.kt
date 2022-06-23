@@ -1,21 +1,15 @@
 package com.example.db_events
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
-import androidx.databinding.DataBindingUtil
+import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.navigation.*
+import androidx.navigation.NavController
+import androidx.navigation.NavDestination
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import com.example.db_events.databinding.ActivityMainBinding
-import com.example.db_events.databinding.FragmentLoginBinding
-
-//val register_button = findViewById<Button>(R.id.register_button)
-//register_button.setOnClickListener{v ->
-////            v.findNavController().navigate()
-//}
 
 class MainActivity : AppCompatActivity() {
     private lateinit var drawerLayout: DrawerLayout
@@ -30,24 +24,31 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         initNavGraph()
-
-        // test
-        //
     }
 
     private fun initNavGraph() {
-        val navHost = supportFragmentManager.findFragmentById(R.id.myNavHostFragment) as NavHostFragment
+        drawerLayout = binding.drawerLayout
+        val navHost =
+            supportFragmentManager.findFragmentById(R.id.myNavHostFragment) as NavHostFragment
 
-        val navController = navHost.navController
-        val navInflater = navController.navInflater
+        val navController = navHost.findNavController()
+        NavigationUI.setupActionBarWithNavController(this, navController, drawerLayout)
+        appBarConfiguration = AppBarConfiguration(navController.graph, drawerLayout)
 
-        val graph = navInflater.inflate(R.navigation.navigation)
-        navController.graph = graph
+        navController.addOnDestinationChangedListener { nc: NavController, nd: NavDestination, args: Bundle? ->
+            if (nd.id == nc.graph.startDestinationId) {
+                drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
+            } else {
+                drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+            }
+        }
+        NavigationUI.setupWithNavController(binding.navView, navController)
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        val navController = this.findNavController(R.id.myNavHostFragment)
-//        return navController.navigateUp()
-        return NavigationUI.navigateUp(navController, drawerLayout)
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.myNavHostFragment) as NavHostFragment
+        val navController = navHostFragment.findNavController()
+        return NavigationUI.navigateUp(navController, appBarConfiguration)
     }
 }

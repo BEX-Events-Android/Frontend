@@ -4,4 +4,11 @@
     <string name="hello_blank_fragment">Hello events list fragment</string>
     <string name="enter_email">Enter email</string>
     <string name="enter_password">Enter password</string>
+    <string name="rules">Rules</string>
+    <string name="about">About</string>
+    <string name="profile">Profile</string>
+    <string name="nav_all_events">All Events</string>
+    <string name="nav_login">Login</string>
+    <string name="nav_register">Register</string>
+    <string name="nav_event_detail">Event Detail</string>
 </resources>
