@@ -1,15 +1,16 @@
 package com.example.db_events
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.db_events.databinding.FragmentLoginBinding
-import android.widget.Toast
-import androidx.lifecycle.ViewModelProvider
 
 class LoginFragment : Fragment() {
     private lateinit var binding: FragmentLoginBinding
@@ -27,6 +28,8 @@ class LoginFragment : Fragment() {
             login()
         }
 
+//        (activity as AppCompatActivity).actionBar?.hide()
+
         val email = arguments?.getString("email")
         val password = arguments?.getString("password")
         if (!email.isNullOrEmpty()) {
@@ -40,6 +43,16 @@ class LoginFragment : Fragment() {
 
         return binding.root
     }
+
+    override fun onResume() {
+        super.onResume()
+        (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
+    }
+
+//    override fun onStop() {
+//        super.onStop()
+//        (activity as AppCompatActivity?)!!.supportActionBar!!.show()
+//    }
 
     private fun login() {
         val email: String = binding.emailInput.text.toString()
