@@ -1,6 +1,7 @@
 package com.example.db_events
 
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.db_events.databinding.FragmentDetailedEventBinding
@@ -40,9 +41,32 @@ class DetailedEventFragment : Fragment() {
                 eventOrganiser.text =
                     "Organiser: ${event.organiser.firstName} ${event.organiser.lastName}"
 
+                if (event.attendingEvent) {
+                    joinButton.text = "Joined"
+                } else {
+                    joinButton.isEnabled = true
+
+                    joinButton.setOnClickListener{view ->
+                        bookEvent(event.id)
+                    }
+                }
+
                 // for now its random
                 eventImage.setImageResource(photosList[Random.nextInt(0, photosList.size)])
             }
         }
+
+        viewModel.bookingSuccessful.observe(viewLifecycleOwner) { isSuccessful ->
+            if (isSuccessful) {
+                binding.joinButton.isEnabled = false
+                binding.joinButton.text = getString(R.string.event_joined)
+            } else {
+                Toast.makeText(activity, "Server error", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun bookEvent(id: String) {
+        viewModel.bookEvent(id)
     }
 }

@@ -11,4 +11,6 @@
     <string name="nav_login">Login</string>
     <string name="nav_register">Register</string>
     <string name="nav_event_detail">Event Detail</string>
+    <string name="event_joined">Joined</string>
+    <string name="book_event">Participate</string>
 </resources>

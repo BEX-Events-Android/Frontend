@@ -10,5 +10,6 @@ data class EventModel(
     var description: String,
     var location: String,
     var duration: String,
-    var organiser: UserModel
+    var organiser: UserModel,
+    var attendingEvent: Boolean
 )

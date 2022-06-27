@@ -20,10 +20,8 @@ class RegisterFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentRegisterBinding.inflate(inflater, container, false)
 
-        val bundle = bundleOf("id" to "5")
-
         binding.loginButton.setOnClickListener{ view: View ->
-            view.findNavController().navigate(R.id.action_registerFragment_to_loginFragment, bundle)
+            view.findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
         }
 
         return binding.root

@@ -18,7 +18,7 @@ class EventsListViewModel : ViewModel() {
 
     private fun getEventList() {
         viewModelScope.launch {
-            val eventsResponse = EventsApi.retrofitService.getEvents()
+            val eventsResponse = EventsApi.retrofitService.getEvents(token)
             if (eventsResponse.isNotEmpty()) {
                 _result.value = eventsResponse
             } else {

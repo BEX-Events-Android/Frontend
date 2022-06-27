@@ -11,7 +11,7 @@
         android:label="@string/nav_register">
         <action
             android:id="@+id/action_registerFragment_to_loginFragment"
-            app:destination="@id/detailedEventFragment"
+            app:destination="@id/loginFragment"
             app:popUpTo="@id/registerFragment"
             app:popUpToInclusive="true" />
     </fragment>
