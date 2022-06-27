@@ -3,6 +3,7 @@ package com.example.db_events.network
 import android.media.metrics.Event
 import com.example.db_events.EventModel
 import com.example.db_events.LoginRequest
+import com.example.db_events.RegisterRequest
 import com.example.db_events.UserModel
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.squareup.moshi.Moshi
@@ -41,6 +42,10 @@ interface EventsApiService {
     @POST("users/login")
     suspend fun loginUser(@Body loginRequest: LoginRequest):
             Response<UserModel>
+
+    @POST("users/register")
+    suspend fun registerUser(@Body registerRequest: RegisterRequest):
+            Response<ResponseBody>
 
     @POST("events/{id}/booking")
     suspend fun bookEvent(@Path("id") id: String, @Header("Cookie") token: String):

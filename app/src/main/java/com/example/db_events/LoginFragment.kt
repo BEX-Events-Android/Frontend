@@ -14,7 +14,7 @@ import androidx.lifecycle.ViewModelProvider
 class LoginFragment : Fragment() {
     private lateinit var binding: FragmentLoginBinding
 
-    private lateinit var viewModel: UserViewModel
+    private lateinit var viewModel: LoginViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -25,6 +25,15 @@ class LoginFragment : Fragment() {
         }
         binding.loginButton.setOnClickListener{ view: View ->
             login()
+        }
+
+        val email = arguments?.getString("email")
+        val password = arguments?.getString("password")
+        if (!email.isNullOrEmpty()) {
+            binding.emailInput.setText(email)
+        }
+        if (!password.isNullOrEmpty()) {
+            binding.passwordInput.setText(password)
         }
 
         subscribeToVM()
@@ -44,7 +53,7 @@ class LoginFragment : Fragment() {
     }
 
     private fun subscribeToVM() {
-        viewModel = ViewModelProvider(this)[UserViewModel::class.java]
+        viewModel = ViewModelProvider(this)[LoginViewModel::class.java]
 
         viewModel.error.observe(viewLifecycleOwner) { err ->
             Toast.makeText(activity, "Something went wrong!", Toast.LENGTH_SHORT).show()

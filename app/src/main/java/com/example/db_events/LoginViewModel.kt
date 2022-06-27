@@ -7,7 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.db_events.network.EventsApi
 import kotlinx.coroutines.launch
 
-class UserViewModel: ViewModel() {
+class LoginViewModel: ViewModel() {
     private val _result = MutableLiveData<UserModel>()
     val result: LiveData<UserModel>
         get() = _result
