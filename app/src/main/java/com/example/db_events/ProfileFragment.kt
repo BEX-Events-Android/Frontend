@@ -35,11 +35,17 @@ class ProfileFragment : Fragment(), EventAdapter.Callback {
 
     private fun subscribeToVM() {
         viewModel = ViewModelProvider(this)[ProfileViewModel::class.java]
-        viewModel.result.observe(viewLifecycleOwner){ eventList ->
-            if (eventList.isNotEmpty()) {
-                binding.futureEventsList.adapter = EventAdapter(eventList, this)
-                binding.previousEventsList.adapter = EventAdapter(eventList, this)
+        viewModel.result.observe(viewLifecycleOwner){ profile ->
+            if (profile.pastEvents.isNotEmpty()) {
+                binding.previousEventsList.adapter = EventAdapter(profile.pastEvents, this)
             }
+            if (profile.upcomingEvents.isNotEmpty()) {
+                binding.futureEventsList.adapter = EventAdapter(profile.upcomingEvents, this)
+            }
+
+            binding.fullName.setText(profile.lastName + " " + profile.firstName)
+
+            binding.email.setText(profile.email)
         }
 
         viewModel.navigationEvent.observe(viewLifecycleOwner){status ->
@@ -51,8 +57,8 @@ class ProfileFragment : Fragment(), EventAdapter.Callback {
 
     override fun onItemClicked(itemId: String) {
         val bundle = bundleOf("id" to itemId)
-//        view?.findNavController()
-//            ?.navigate(R.id.action_eventsListFragment_to_detailedEventFragment, bundle)
+        view?.findNavController()
+            ?.navigate(com.example.db_events.R.id.action_eventsListFragment_to_detailedEventFragment, bundle)
     }
 
     private fun signout() {

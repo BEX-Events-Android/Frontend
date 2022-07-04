@@ -8,8 +8,8 @@ import com.example.db_events.network.EventsApi
 import kotlinx.coroutines.launch
 
 class ProfileViewModel : ViewModel() {
-    private val _result = MutableLiveData<List<EventModel>>()
-    val result: LiveData<List<EventModel>>
+    private val _result = MutableLiveData<ProfileModel>()
+    val result: LiveData<ProfileModel>
         get() = _result
 
     private val _navigationEvent = MutableLiveData<Boolean>()
@@ -17,13 +17,15 @@ class ProfileViewModel : ViewModel() {
         get() = _navigationEvent
 
     init {
-        getEventList()
+        getProfile()
     }
 
-    private fun getEventList() {
+    private fun getProfile() {
         viewModelScope.launch {
-            val eventsResponse = EventsApi.retrofitService.getEvents(token)
-            if (eventsResponse.isNotEmpty()) {
+            val eventsResponse = EventsApi.retrofitService.getProfile(token)
+            if (eventsResponse.firstName.isNotEmpty()
+                && eventsResponse.lastName.isNotEmpty()
+                && eventsResponse.email.isNotEmpty()) {
                 _result.value = eventsResponse
             } else {
                 // TODO error handling

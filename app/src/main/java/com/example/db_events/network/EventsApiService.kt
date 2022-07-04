@@ -1,10 +1,7 @@
 package com.example.db_events.network
 
 import android.media.metrics.Event
-import com.example.db_events.EventModel
-import com.example.db_events.LoginRequest
-import com.example.db_events.RegisterRequest
-import com.example.db_events.UserModel
+import com.example.db_events.*
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -53,6 +50,10 @@ interface EventsApiService {
 
     @POST("users/signout")
     suspend fun signOut() : Response<ResponseBody>
+
+    @GET("users/profile")
+    suspend fun getProfile(@Header("Cookie") token: String):
+            ProfileModel
 }
 
 object EventsApi {
