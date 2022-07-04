@@ -34,11 +34,23 @@
         tools:layout="@layout/fragment_events_list">
         <action
             android:id="@+id/action_eventsListFragment_to_detailedEventFragment"
-            app:destination="@id/detailedEventFragment" />
+            app:destination="@id/detailedEventFragment"/>
+        <action
+            android:id="@+id/action_eventsListFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailedEventFragment"
         android:name="com.example.db_events.DetailedEventFragment"
         android:label="@string/nav_event_detail"
         tools:layout="@layout/fragment_detailed_event" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.db_events.ProfileFragment"
+        android:label="@string/nav_profile"
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
 </navigation>

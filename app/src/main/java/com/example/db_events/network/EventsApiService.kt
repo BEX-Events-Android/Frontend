@@ -1,10 +1,7 @@
 package com.example.db_events.network
 
 import android.media.metrics.Event
-import com.example.db_events.EventModel
-import com.example.db_events.LoginRequest
-import com.example.db_events.RegisterRequest
-import com.example.db_events.UserModel
+import com.example.db_events.*
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -18,7 +15,7 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.*
 
 
-private const val BASE_URL = "http://10.0.2.2:8081/"
+private const val BASE_URL = "http://10.0.2.2:8080/"
 
 private val moshi = Moshi.Builder()
     .add(KotlinJsonAdapterFactory())
@@ -50,6 +47,13 @@ interface EventsApiService {
     @POST("events/{id}/booking")
     suspend fun bookEvent(@Path("id") id: String, @Header("Cookie") token: String):
             Response<ResponseBody>
+
+    @POST("users/signout")
+    suspend fun signOut() : Response<ResponseBody>
+
+    @GET("users/profile")
+    suspend fun getProfile(@Header("Cookie") token: String):
+            ProfileModel
 }
 
 object EventsApi {
