@@ -16,4 +16,7 @@
     <string name="sign_out">Sign Out</string>
     <string name="previous_events">Previous Events</string>
     <string name="future_events">Future Events</string>
+    <string name="fullName_placeholder">Anghel Andrei</string>
+    <string name="email_placeholder">andrei@gmail.com</string>
+    <string name="nav_profile">Profile</string>
 </resources>

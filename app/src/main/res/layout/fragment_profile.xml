@@ -30,7 +30,7 @@
         app:layout_constraintWidth_percent="0.35"
         app:layout_constraintHeight_default="percent"
         app:layout_constraintHeight_percent="0.18"
-        tools:srcCompat="@tools:sample/avatars" />
+        android:src="@drawable/android" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/fullName"
@@ -43,7 +43,7 @@
         app:layout_constraintTop_toTopOf="@id/imageView"
         app:layout_constraintStart_toEndOf="@id/imageView"
         app:layout_constraintEnd_toEndOf="@id/backgroundTop"
-        tools:text="FullName" />
+        android:text="@string/fullName_placeholder" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/email"
@@ -55,7 +55,7 @@
         app:layout_constraintTop_toBottomOf="@id/fullName"
         app:layout_constraintStart_toStartOf="@id/fullName"
         app:layout_constraintEnd_toEndOf="@id/fullName"
-        tools:text="Email" />
+        android:text="@string/email_placeholder" />
 
     <com.google.android.material.button.MaterialButton
         android:text="@string/sign_out"
@@ -94,6 +94,8 @@
         app:layout_constraintHeight_default="percent"
         app:layout_constraintHeight_percent="0.35"
         android:layout_marginTop="@dimen/small_margin"
+        app:layout_constraintBottom_toTopOf="@id/previous_events"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         />
 
     <com.google.android.material.textview.MaterialTextView
@@ -116,6 +118,8 @@
         app:layout_constraintEnd_toEndOf="@id/previous_events"
         app:layout_constraintHeight_default="percent"
         app:layout_constraintHeight_percent="0.35"
-        android:layout_marginTop="@dimen/small_margin"/>
+        android:layout_marginTop="@dimen/small_margin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

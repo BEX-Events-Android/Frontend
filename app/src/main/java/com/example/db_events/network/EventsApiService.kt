@@ -50,6 +50,9 @@ interface EventsApiService {
     @POST("events/{id}/booking")
     suspend fun bookEvent(@Path("id") id: String, @Header("Cookie") token: String):
             Response<ResponseBody>
+
+    @POST("users/signout")
+    suspend fun signOut() : Response<ResponseBody>
 }
 
 object EventsApi {
