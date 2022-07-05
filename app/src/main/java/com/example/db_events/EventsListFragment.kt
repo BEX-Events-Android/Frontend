@@ -3,6 +3,7 @@ package com.example.db_events
 import android.R
 import android.os.Bundle
 import android.view.*
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -15,12 +16,18 @@ class EventsListFragment : Fragment(), EventAdapter.Callback {
     private lateinit var binding: FragmentEventsListBinding
     private lateinit var viewModel: EventsListViewModel
 
+    lateinit var unmodifiedListOfEvents: ArrayList<EventModel>
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         setHasOptionsMenu(true)
         binding = FragmentEventsListBinding.inflate(inflater, container, false)
+
+        binding.fab.setOnClickListener {
+            setFilter()
+        }
 
         subscribeToVM()
 
@@ -47,9 +54,15 @@ class EventsListFragment : Fragment(), EventAdapter.Callback {
         viewModel = ViewModelProvider(this)[EventsListViewModel::class.java]
         viewModel.result.observe(viewLifecycleOwner){ eventList ->
             if (eventList.isNotEmpty()) {
-                binding.eventsList.adapter = EventAdapter(eventList, this)
+                unmodifiedListOfEvents = ArrayList(eventList)
+                binding.eventsList.adapter = EventAdapter(unmodifiedListOfEvents, this)
             }
         }
+    }
+
+    private fun setFilter() {
+        val modifiedListOfEvents = unmodifiedListOfEvents.filter { event -> event.location.equals("DB Main Room") } as ArrayList<EventModel>
+        binding.eventsList.swapAdapter(EventAdapter(modifiedListOfEvents, this), false)
     }
 
     override fun onItemClicked(itemId: String) {
