@@ -19,4 +19,5 @@
     <string name="fullName_placeholder">Anghel Andrei</string>
     <string name="email_placeholder">andrei@gmail.com</string>
     <string name="nav_profile">Profile</string>
+    <string name="filter_by_location">Filter by location</string>
 </resources>

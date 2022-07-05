@@ -1,22 +1,27 @@
 package com.example.db_events
 
-import android.R
 import android.os.Bundle
+import android.os.Parcel
+import android.os.Parcelable
 import android.view.*
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResult
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.example.db_events.databinding.FragmentEventsListBinding
+import java.io.Serializable
 
 
-class EventsListFragment : Fragment(), EventAdapter.Callback {
+class EventsListFragment() : Fragment(), EventAdapter.Callback, Serializable {
     private lateinit var binding: FragmentEventsListBinding
     private lateinit var viewModel: EventsListViewModel
 
     lateinit var unmodifiedListOfEvents: ArrayList<EventModel>
+    private lateinit var locationsList: ArrayList<String>
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,7 +31,10 @@ class EventsListFragment : Fragment(), EventAdapter.Callback {
         binding = FragmentEventsListBinding.inflate(inflater, container, false)
 
         binding.fab.setOnClickListener {
-            setFilter()
+//            setFilter()
+            var dialog = CustomDialogFragment().newInstance(locationsList)
+            requireActivity().supportFragmentManager.setFragmentResult("location", bundleOf("location" to this@EventsListFragment))
+            getActivity()?.let { it1 -> dialog!!.show(it1.supportFragmentManager, "customDialog") }
         }
 
         subscribeToVM()
@@ -58,10 +66,15 @@ class EventsListFragment : Fragment(), EventAdapter.Callback {
                 binding.eventsList.adapter = EventAdapter(unmodifiedListOfEvents, this)
             }
         }
+        viewModel.locationFilter.observe(viewLifecycleOwner){ locationSet ->
+            if (locationSet.isNotEmpty()) {
+                locationsList = ArrayList(locationSet)
+            }
+        }
     }
 
-    private fun setFilter() {
-        val modifiedListOfEvents = unmodifiedListOfEvents.filter { event -> event.location.equals("DB Main Room") } as ArrayList<EventModel>
+    fun setFilter(location : String) {
+        val modifiedListOfEvents = unmodifiedListOfEvents.filter { event -> event.location.equals(location) } as ArrayList<EventModel>
         binding.eventsList.swapAdapter(EventAdapter(modifiedListOfEvents, this), false)
     }
 
