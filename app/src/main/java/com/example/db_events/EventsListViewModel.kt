@@ -12,8 +12,13 @@ class EventsListViewModel : ViewModel() {
     val result: LiveData<List<EventModel>>
         get() = _result
 
+    private val _locationFilter = MutableLiveData<Set<String>>()
+    val locationFilter: LiveData<Set<String>>
+        get() = _locationFilter
+
     init {
         getEventList()
+        getLocationList()
     }
 
     private fun getEventList() {
@@ -21,6 +26,17 @@ class EventsListViewModel : ViewModel() {
             val eventsResponse = EventsApi.retrofitService.getEvents(token)
             if (eventsResponse.isNotEmpty()) {
                 _result.value = eventsResponse
+            } else {
+                // TODO error handling
+            }
+        }
+    }
+
+    private fun getLocationList() {
+        viewModelScope.launch {
+            val eventsResponse = EventsApi.retrofitService.getLocationList(token)
+            if (eventsResponse.isNotEmpty()) {
+                _locationFilter.value = eventsResponse
             } else {
                 // TODO error handling
             }

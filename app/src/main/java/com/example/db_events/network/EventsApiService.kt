@@ -54,6 +54,10 @@ interface EventsApiService {
     @GET("users/profile")
     suspend fun getProfile(@Header("Cookie") token: String):
             ProfileModel
+
+    @GET("events/locations")
+    suspend fun getLocationList(@Header("Cookie") token: String):
+            Set<String>
 }
 
 object EventsApi {

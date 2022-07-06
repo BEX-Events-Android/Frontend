@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/headerTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/filter_by_location"
+        android:textSize="@dimen/medium_text"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="@dimen/big_margin"
+        />
+
+    <RadioGroup
+        android:id="@+id/locationRadioGroup"
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/big_margin"
+        app:layout_constraintTop_toBottomOf="@id/headerTextView"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        />
+
+    <Button
+        android:id="@+id/datePickerButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ic_calendar"
+        android:text="Pick\ndate"
+        android:backgroundTint="@color/teal_700"
+        app:layout_constraintTop_toBottomOf="@id/locationRadioGroup"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/picked_date_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/picked_date"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/datePickerButton"
+        />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/picked_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/picked_date_label"
+        />
+
+    <Button
+        android:id="@+id/cancelButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/default_margin"
+        android:layout_marginTop="@dimen/big_margin"
+        android:backgroundTint="@color/red"
+        android:text="@string/cancel"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/picked_date" />
+
+    <Button
+        android:id="@+id/submitButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/submit"
+        app:layout_constraintTop_toBottomOf="@id/picked_date"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="@dimen/big_margin"
+        android:layout_marginTop="@dimen/big_margin"
+        />
+</androidx.constraintlayout.widget.ConstraintLayout>
