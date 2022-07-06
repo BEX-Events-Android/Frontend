@@ -9,12 +9,12 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.db_events.databinding.FragmentCustomDialogBinding
+import java.io.Serializable
 
 
-class CustomDialogFragment : DialogFragment() {
+class CustomDialogFragment : DialogFragment(), Serializable {
 
     private lateinit var binding: FragmentCustomDialogBinding
-    private lateinit var viewModel: CustomDialogViewModel
 
     private lateinit var locationsList: ArrayList<String>
 
@@ -37,8 +37,6 @@ class CustomDialogFragment : DialogFragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentCustomDialogBinding.inflate(inflater, container, false)
-
-        subscribeToVM()
 
         for(i in locationsList.indices) {
             val rb = RadioButton(getActivity())
@@ -72,16 +70,22 @@ class CustomDialogFragment : DialogFragment() {
                 viewLifecycleOwner
             ) { requestKey, result ->
                 val fragment = result.get("location") as EventsListFragment
-                fragment.setFilter(location)
+                fragment.setFilter(location, binding.pickedDate.text.toString())
             }
             dismiss()
+        }
+
+        binding.datePickerButton.setOnClickListener {
+            var dialog = DatePickDialogFragment()
+            requireActivity().supportFragmentManager.setFragmentResult("date", bundleOf("datepick" to this@CustomDialogFragment))
+            dialog!!.show(requireActivity().supportFragmentManager, "testDialog")
         }
 
         return binding.root
     }
 
-    private fun subscribeToVM() {
-        viewModel = ViewModelProvider(this)[CustomDialogViewModel::class.java]
-
+    fun setPickedDate (date : String) {
+        binding.pickedDate.setText(date)
     }
+
 }

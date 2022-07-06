@@ -28,24 +28,55 @@
         />
 
     <Button
+        android:id="@+id/datePickerButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ic_calendar"
+        android:text="Pick\ndate"
+        android:backgroundTint="@color/teal_700"
+        app:layout_constraintTop_toBottomOf="@id/locationRadioGroup"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/picked_date_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/picked_date"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/datePickerButton"
+        />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/picked_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/picked_date_label"
+        />
+
+    <Button
         android:id="@+id/cancelButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Cancel"
-        android:backgroundTint="@color/red"
-        android:textColor="@color/white"
-        app:layout_constraintTop_toBottomOf="@id/locationRadioGroup"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="@dimen/big_margin"
+        android:layout_marginStart="@dimen/default_margin"
         android:layout_marginTop="@dimen/big_margin"
-        />
+        android:backgroundTint="@color/red"
+        android:text="@string/cancel"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/picked_date" />
 
     <Button
         android:id="@+id/submitButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Submit"
-        app:layout_constraintTop_toBottomOf="@id/locationRadioGroup"
+        android:text="@string/submit"
+        app:layout_constraintTop_toBottomOf="@id/picked_date"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginEnd="@dimen/big_margin"
         android:layout_marginTop="@dimen/big_margin"

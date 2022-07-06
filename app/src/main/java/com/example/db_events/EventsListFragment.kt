@@ -31,10 +31,9 @@ class EventsListFragment() : Fragment(), EventAdapter.Callback, Serializable {
         binding = FragmentEventsListBinding.inflate(inflater, container, false)
 
         binding.fab.setOnClickListener {
-//            setFilter()
             var dialog = CustomDialogFragment().newInstance(locationsList)
             requireActivity().supportFragmentManager.setFragmentResult("location", bundleOf("location" to this@EventsListFragment))
-            getActivity()?.let { it1 -> dialog!!.show(it1.supportFragmentManager, "customDialog") }
+            requireActivity().let { it1 -> dialog!!.show(it1.supportFragmentManager, "customDialog") }
         }
 
         subscribeToVM()
@@ -43,14 +42,14 @@ class EventsListFragment() : Fragment(), EventAdapter.Callback, Serializable {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(com.example.db_events.R.menu.profile_menu, menu)
+        inflater.inflate(R.menu.profile_menu, menu)
         super.onCreateOptionsMenu(menu, inflater)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return (when(item.itemId) {
-            com.example.db_events.R.id.show_profile -> {
-                view?.findNavController()?.navigate(com.example.db_events.R.id.action_eventsListFragment_to_profileFragment)
+            R.id.show_profile -> {
+                view?.findNavController()?.navigate(R.id.action_eventsListFragment_to_profileFragment)
                 true
             }
             else ->
@@ -73,15 +72,22 @@ class EventsListFragment() : Fragment(), EventAdapter.Callback, Serializable {
         }
     }
 
-    fun setFilter(location : String) {
-        val modifiedListOfEvents = unmodifiedListOfEvents.filter { event -> event.location.equals(location) } as ArrayList<EventModel>
+    fun setFilter(location : String, date: String) {
+        var modifiedListOfEvents = unmodifiedListOfEvents
+        if(location != "None") {
+            modifiedListOfEvents = modifiedListOfEvents.filter { event -> event.location.equals(location) } as ArrayList<EventModel>
+        }
+        if(date != "") {
+            modifiedListOfEvents = modifiedListOfEvents.filter { event -> event.startDateTime.contains(date) } as ArrayList<EventModel>
+        }
+
         binding.eventsList.swapAdapter(EventAdapter(modifiedListOfEvents, this), false)
     }
 
     override fun onItemClicked(itemId: String) {
         val bundle = bundleOf("id" to itemId)
         view?.findNavController()
-            ?.navigate(com.example.db_events.R.id.action_eventsListFragment_to_detailedEventFragment, bundle)
+            ?.navigate(R.id.action_eventsListFragment_to_detailedEventFragment, bundle)
     }
 
     override fun onResume() {
